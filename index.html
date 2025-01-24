@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Резюме | Янзин Данил</title>
+  <style>
+    /* Общие стили */
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #1d1d1f;
+      background-color: #000;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+      font-weight: 600;
+    }
+
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Прелоадер */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #terminal {
+      font-family: "Courier New", Courier, monospace;
+      color: #00ff00;
+      font-size: 1.2rem;
+      white-space: pre-wrap;
+    }
+
+    #loading-bar {
+      width: 100%;
+      height: 2px;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    #loading-bar::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #007BFF;
+      animation: loading 2s linear infinite;
+    }
+
+    @keyframes loading {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Шапка */
+    header {
+      text-align: center;
+      padding: 150px 20px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid #007BFF;
+      margin-bottom: 20px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out 0.5s forwards;
+    }
+
+    header p {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out 0.7s forwards;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #007BFF;
+      color: white;
+      border-radius: 30px;
+      transition: background-color 0.3s, transform 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out 0.9s forwards;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    /* Секции */
+    section {
+      padding: 80px 20px;
+      margin: 0 auto;
+      max-width: 1200px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out forwards;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 20px;
+      color: white;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    section:nth-child(2) { animation-delay: 0.3s; }
+    section:nth-child(3) { animation-delay: 0.5s; }
+    section:nth-child(4) { animation-delay: 0.7s; }
+    section:nth-child(5) { animation-delay: 0.9s; }
+    section:nth-child(6) { animation-delay: 1.1s; }
+
+    /* О себе */
+    #about {
+      text-align: center;
+    }
+
+    /* Навыки */
+    #skills ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    #skills ul li {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      flex: 1 1 calc(33.333% - 40px);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    #skills ul li:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Опыт работы */
+    .experience-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .experience-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .experience-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .experience-item p {
+      margin: 5px 0;
+    }
+
+    .experience-item ul {
+      padding-left: 20px;
+    }
+
+    /* Образование */
+    .education-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .education-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .education-item h3 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+    }
+
+    /* Контакты */
+    #contact {
+      text-align: center;
+    }
+
+    #contact p {
+      margin: 10px 0;
+    }
+
+    /* Анимации */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Контейнер для анимации звезд */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Прелоадер -->
+  <div id="preloader">
+    <div>
+      <div id="terminal">Загрузка резюме...</div>
+      <div id="loading-bar"></div>
+    </div>
+  </div>
+
+  <!-- Контейнер для анимации звезд -->
+  <div id="particles-js"></div>
+
+  <!-- Шапка -->
+  <header>
+    <img src="img.png" alt="Фото Янзин Данил">
+    <h1>Янзин Данил</h1>
+    <p>Media Buyer (In-app/TT/FB)</p>
+    <a href="#" class="btn">Скачать резюме (PDF)</a>
+  </header>
+
+  <!-- О себе -->
+  <section id="about">
+    <h2>О себе</h2>
+    <p>
+      Мужчина, 27 лет, родился 2 октября 1997. Проживаю в Санкт-Петербурге. 
+      Гражданство: Россия, есть разрешение на работу. Не готов к переезду, 
+      готов к редким командировкам.
+    </p>
+    <p>
+      Люблю интернет и электронику, создание сайтов, написание ботов. 
+      Арбитраж трафика плотно вошел в мою жизнь и стал ключевым хобби 
+      и любимой работой.
+    </p>
+  </section>
+
+  <!-- Навыки -->
+  <section id="skills">
+    <h2>Навыки</h2>
+    <ul>
+      <li>Media Buying (FB, TikTok, In-app)</li>
+      <li>Монетизация трафика</li>
+      <li>Автоматизация процессов</li>
+      <li>Настройка трекеров (Keitaro, Binom)</li>
+      <li>Работа с креативами и аналитикой</li>
+      <li>Администрирование серверов Linux</li>
+      <li>Базовые навыки Frontend (HTML, CSS)</li>
+      <li>Знание рекламных платформ: Facebook Ads, TikTok Ads, Unity Ads, Google AdWords</li>
+    </ul>
+  </section>
+
+  <!-- Опыт работы -->
+  <section id="experience">
+    <h2>Опыт работы</h2>
+    <div class="experience-item">
+      <h3>Adnow</h3>
+      <p>Июль 2024 — настоящее время (7 месяцев)</p>
+      <p>Руководитель отдела Search Feed Ads</p>
+      <ul>
+        <li>Монетизация трафика, автоматизация получения прибыли.</li>
+        <li>Работа над сторонними проектами под NDA.</li>
+      </ul>
+    </div>
+    <div class="experience-item">
+      <h3>1Xbet</h3>
+      <p>Ноябрь 2022 — Июнь 2024 (1 год 8 месяцев)</p>
+      <p>Aff Manager, Media Buyer (FB, In-app)</p>
+      <ul>
+        <li>Отлив на приложения по странам Южной Африки и Латинской Америки.</li>
+        <li>Поиск новых аффилейтов, подключение новых паблишеров.</li>
+      </ul>
+    </div>
+    <div class="experience-item">
+      <h3>8888</h3>
+      <p>Май 2022 — Ноябрь 2022 (7 месяцев)</p>
+      <p>Team Lead TikTok In-app</p>
+      <ul>
+        <li>Руководство командой из 5 человек.</li>
+        <li>Работа с источниками: IS, Unity Ads, Vungle, TikTok.</li>
+      </ul>
+    </div>
+    <div class="experience-item">
+      <h3>ZorbasMedia</h3>
+      <p>Июнь 2021 — Декабрь 2021 (7 месяцев)</p>
+      <p>Media Buyer In-app</p>
+      <ul>
+        <li>Ведение рекламных кампаний в вертикали Gambling.</li>
+        <li>Источник трафика: Unity Ads.</li>
+      </ul>
+    </div>
+    <div class="experience-item">
+      <h3>Affmy.com</h3>
+      <p>Февраль 2021 — Октябрь 2021 (9 месяцев)</p>
+      <p>Media Buyer</p>
+      <ul>
+        <li>Запуск рекламных кампаний с различных источников.</li>
+        <li>Работа с креативами, настройка трекера, ведение отчетности.</li>
+      </ul>
+    </div>
+    <div class="experience-item">
+      <h3>Adskill.io</h3>
+      <p>Декабрь 2020 — Май 2021 (6 месяцев)</p>
+      <p>Media Buyer</p>
+      <ul>
+        <li>Закупка трафика FB и TT, тестирование креативов и связок.</li>
+        <li>Вертикали: Gambling, Betting.</li>
+      </ul>
+    </div>
+    <div class="experience-item">
+      <h3>CPA-сеть 1 (First Tier!)</h3>
+      <p>Октябрь 2019 — Декабрь 2020 (1 год 3 месяца)</p>
+      <p>Несколько должностей по мере роста</p>
+      <ul>
+        <li>Подписан строгий NDA, подробности при личной встрече.</li>
+      </ul>
+    </div>
+    <div class="experience-item">
+      <h3>Самсаб</h3>
+      <p>Август 2019 — Декабрь 2019 (5 месяцев)</p>
+      <p>Специалист по контролю качества ПО</p>
+      <ul>
+        <li>Тестирование веб-интерфейсов и продуктов компании.</li>
+      </ul>
+    </div>
+    <div class="experience-item">
+      <h3>CPA-сеть 2 (Черные вертикали)</h3>
+      <p>Март 2019 — Декабрь 2019 (10 месяцев)</p>
+      <p>App Development Lead</p>
+      <ul>
+        <li>Проектирование систем фильтрации трафика, настройка TDS.</li>
+        <li>Разработка приложений под Gambling и Betting.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Образование -->
+  <section id="education">
+    <h2>Образование</h2>
+    <div class="education-item">
+      <h3>Санкт-Петербургский политехнический университет Петра Великого</h3>
+      <p>2021 — Неоконченное высшее</p>
+      <p>Прикладная информатика, прикладной программист</p>
+    </div>
+    <div class="education-item">
+      <h3>Международный банковский институт, Санкт-Петербург</h3>
+      <p>2016</p>
+      <p>Банковское дело, банкир-экономист</p>
+    </div>
+  </section>
+
+  <!-- Контакты -->
+  <section id="contact">
+    <h2>Контакты</h2>
+    <p>Email: <a href="mailto:ninel.akim@gmail.com">ninel.akim@gmail.com</a></p>
+    <p>Telegram: <a href="http://t.me/yansimple">@yansimple</a></p>
+  </section>
+
+  <!-- Подключение Particles.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Настройка анимации звезд
+    particlesJS('particles-js', {
+      particles: {
+        number: {
+          value: 150,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: '#ffffff'
+        },
+        shape: {
+          type: 'circle',
+          stroke: {
+            width: 0,
+            color: '#000000'
+          }
+        },
+        opacity: {
+          value: 0.5,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 1,
+            opacity_min: 0.1,
+            sync: false
+          }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 2,
+            size_min: 0.1,
+            sync: false
+          }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#ffffff',
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: 'none',
+          random: true,
+          straight: false,
+          out_mode: 'out',
+          bounce: false,
+          attract: {
+            enable: false,
+            rotateX: 600,
+            rotateY: 1200
+          }
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: {
+            enable: true,
+            mode: 'bubble'
+          },
+          onclick: {
+            enable: true,
+            mode: 'push'
+          },
+          resize: true
+        },
+        modes: {
+          bubble: {
+            distance: 200,
+            size: 6,
+            duration: 2,
+            opacity: 0.8,
+            speed: 3
+          },
+          push: {
+            particles_nb: 4
+          }
+        }
+      },
+      retina_detect: true
+    });
+
+    // Анимация печатающегося текста
+    const terminal = document.getElementById('terminal');
+    const text = "Загрузка резюме...\nИнициализация данных...\nПодключение к серверу...\nГотово!";
+    let index = 0;
+
+    function typeText() {
+      if (index < text.length) {
+        terminal.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeText, 50); // Скорость печати
+      } else {
+        setTimeout(() => {
+          document.getElementById('preloader').style.display = 'none';
+        }, 1000);
+      }
+    }
+
+    // Запуск анимации
+    typeText();
+  </script>
+</body>
+</html>
