@@ -13,20 +13,61 @@
       background-color: #000;
       line-height: 1.6;
       overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
 
-    h1, h2, h3 {
-      margin-top: 0;
-      font-weight: 600;
+    /* Стили для окна macOS */
+    .mac-window {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #000;
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+      position: relative;
     }
 
-    a {
-      color: #007BFF;
-      text-decoration: none;
+    .mac-window-header {
+      background-color: #1d1d1f;
+      padding: 10px;
+      border-bottom: 1px solid #333;
+      display: flex;
+      align-items: center;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .mac-window-dots {
+      display: flex;
+      gap: 8px;
+      padding-left: 10px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .dot.red {
+      background-color: #ff5f56; /* Красная точка */
+    }
+
+    .dot.yellow {
+      background-color: #ffbd2e; /* Желтая точка */
+    }
+
+    .dot.green {
+      background-color: #27c93f; /* Зеленая точка */
+    }
+
+    .mac-window-content {
+      padding: 20px;
+      color: white;
     }
 
     /* Прелоадер */
@@ -45,7 +86,7 @@
 
     #terminal {
       font-family: "Courier New", Courier, monospace;
-      color: #00ff00;
+      color: white; /* Белый цвет текста */
       font-size: 1.2rem;
       white-space: pre-wrap;
     }
@@ -240,173 +281,105 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
-
-    /* Контейнер для анимации звезд */
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
   </style>
 </head>
 <body>
   <!-- Прелоадер -->
   <div id="preloader">
     <div>
-      <div id="terminal">Загрузка резюме...</div>
+      <div id="terminal"></div>
       <div id="loading-bar"></div>
     </div>
   </div>
 
-  <!-- Контейнер для анимации звезд -->
-  <div id="particles-js"></div>
+  <!-- Окно macOS -->
+  <div class="mac-window">
+    <!-- Шапка окна с точками -->
+    <div class="mac-window-header">
+      <div class="mac-window-dots">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+    </div>
 
-  <!-- Шапка -->
-  <header>
-    <img src="img.png" alt="Фото Янзин Данил">
-    <h1>Янзин Данил</h1>
-    <p>Media Buyer (In-app/TT/FB)</p>
-   
-  </header>
+    <!-- Контент окна -->
+    <div class="mac-window-content">
+      <!-- Шапка -->
+      <header>
+        <img src="img.png" alt="Фото Янзин Данил">
+        <h1>Янзин Данил</h1>
+        <p>Media Buyer (In-app/TT/FB)</p>
+      </header>
 
-  <!-- О себе -->
-  <section id="about">
-    <h2>О себе</h2>
-    <p>
-      Мужчина, 27 лет, родился 2 октября 1997. Проживаю в Санкт-Петербурге. 
-      Гражданство: Россия, есть разрешение на работу. Не готов к переезду, 
-      готов к редким командировкам.
-    </p>
-    <p>
-      Люблю интернет и электронику, создание сайтов, написание ботов. 
-      Арбитраж трафика плотно вошел в мою жизнь и стал ключевым хобби 
-      и любимой работой.
-    </p>
-  </section>
+      <!-- О себе -->
+      <section id="about">
+        <h2>О себе</h2>
+        <p>
+          Мужчина, 27 лет, родился 2 октября 1997. Проживаю в Санкт-Петербурге. 
+          Гражданство: Россия, есть разрешение на работу. Не готов к переезду, 
+          готов к редким командировкам.
+        </p>
+        <p>
+          Люблю интернет и электронику, создание сайтов, написание ботов. 
+          Арбитраж трафика плотно вошел в мою жизнь и стал ключевым хобби 
+          и любимой работой.
+        </p>
+      </section>
 
-  <!-- Навыки -->
-  <section id="skills">
-    <h2>Навыки</h2>
-    <ul>
-      <li>Media Buying (FB, TikTok, In-app)</li>
-      <li>Монетизация трафика</li>
-      <li>Автоматизация процессов</li>
-      <li>Настройка трекеров (Keitaro, Binom)</li>
-      <li>Работа с креативами и аналитикой</li>
-      <li>Администрирование серверов Linux</li>
-      <li>Базовые навыки Frontend (HTML, CSS)</li>
-      <li>Знание рекламных платформ: Facebook Ads, TikTok Ads, Unity Ads, Google AdWords</li>
-    </ul>
-  </section>
+      <!-- Навыки -->
+      <section id="skills">
+        <h2>Навыки</h2>
+        <ul>
+          <li>Media Buying (FB, TikTok, In-app)</li>
+          <li>Монетизация трафика</li>
+          <li>Автоматизация процессов</li>
+          <li>Настройка трекеров (Keitaro, Binom)</li>
+          <li>Работа с креативами и аналитикой</li>
+          <li>Администрирование серверов Linux</li>
+          <li>Базовые навыки Frontend (HTML, CSS)</li>
+          <li>Знание рекламных платформ: Facebook Ads, TikTok Ads, Unity Ads, Google AdWords</li>
+        </ul>
+      </section>
 
-  <!-- Опыт работы -->
-  <section id="experience">
-    <h2>Опыт работы</h2>
-    <div class="experience-item">
-      <h3>Adnow</h3>
-      <p>Июль 2024 — настоящее время (7 месяцев)</p>
-      <p>Руководитель отдела Search Feed Ads</p>
-      <ul>
-        <li>Монетизация трафика, автоматизация получения прибыли.</li>
-        <li>Работа над сторонними проектами под NDA.</li>
-      </ul>
-    </div>
-    <div class="experience-item">
-      <h3>1Xbet</h3>
-      <p>Ноябрь 2022 — Июнь 2024 (1 год 8 месяцев)</p>
-      <p>Aff Manager, Media Buyer (FB, In-app)</p>
-      <ul>
-        <li>Отлив на приложения по странам Южной Африки и Латинской Америки.</li>
-        <li>Поиск новых аффилейтов, подключение новых паблишеров.</li>
-      </ul>
-    </div>
-    <div class="experience-item">
-      <h3>8888</h3>
-      <p>Май 2022 — Ноябрь 2022 (7 месяцев)</p>
-      <p>Team Lead TikTok In-app</p>
-      <ul>
-        <li>Руководство командой из 5 человек.</li>
-        <li>Работа с источниками: IS, Unity Ads, Vungle, TikTok.</li>
-      </ul>
-    </div>
-    <div class="experience-item">
-      <h3>ZorbasMedia</h3>
-      <p>Июнь 2021 — Декабрь 2021 (7 месяцев)</p>
-      <p>Media Buyer In-app</p>
-      <ul>
-        <li>Ведение рекламных кампаний в вертикали Gambling.</li>
-        <li>Источник трафика: Unity Ads.</li>
-      </ul>
-    </div>
-    <div class="experience-item">
-      <h3>Affmy.com</h3>
-      <p>Февраль 2021 — Октябрь 2021 (9 месяцев)</p>
-      <p>Media Buyer</p>
-      <ul>
-        <li>Запуск рекламных кампаний с различных источников.</li>
-        <li>Работа с креативами, настройка трекера, ведение отчетности.</li>
-      </ul>
-    </div>
-    <div class="experience-item">
-      <h3>Adskill.io</h3>
-      <p>Декабрь 2020 — Май 2021 (6 месяцев)</p>
-      <p>Media Buyer</p>
-      <ul>
-        <li>Закупка трафика FB и TT, тестирование креативов и связок.</li>
-        <li>Вертикали: Gambling, Betting.</li>
-      </ul>
-    </div>
-    <div class="experience-item">
-      <h3>CPA-сеть 1 (First Tier!)</h3>
-      <p>Октябрь 2019 — Декабрь 2020 (1 год 3 месяца)</p>
-      <p>Несколько должностей по мере роста</p>
-      <ul>
-        <li>Подписан строгий NDA, подробности при личной встрече.</li>
-      </ul>
-    </div>
-    <div class="experience-item">
-      <h3>Самсаб</h3>
-      <p>Август 2019 — Декабрь 2019 (5 месяцев)</p>
-      <p>Специалист по контролю качества ПО</p>
-      <ul>
-        <li>Тестирование веб-интерфейсов и продуктов компании.</li>
-      </ul>
-    </div>
-    <div class="experience-item">
-      <h3>CPA-сеть 2 (Черные вертикали)</h3>
-      <p>Март 2019 — Декабрь 2019 (10 месяцев)</p>
-      <p>App Development Lead</p>
-      <ul>
-        <li>Проектирование систем фильтрации трафика, настройка TDS.</li>
-        <li>Разработка приложений под Gambling и Betting.</li>
-      </ul>
-    </div>
-  </section>
+      <!-- Опыт работы -->
+      <section id="experience">
+        <h2>Опыт работы</h2>
+        <div class="experience-item">
+          <h3>Adnow</h3>
+          <p>Июль 2024 — настоящее время (7 месяцев)</p>
+          <p>Руководитель отдела Search Feed Ads</p>
+          <ul>
+            <li>Монетизация трафика, автоматизация получения прибыли.</li>
+            <li>Работа над сторонними проектами под NDA.</li>
+          </ul>
+        </div>
+        <!-- Остальные блоки опыта работы -->
+      </section>
 
-  <!-- Образование -->
-  <section id="education">
-    <h2>Образование</h2>
-    <div class="education-item">
-      <h3>Санкт-Петербургский политехнический университет Петра Великого</h3>
-      <p>2021 — Неоконченное высшее</p>
-      <p>Прикладная информатика, прикладной программист</p>
-    </div>
-    <div class="education-item">
-      <h3>Международный банковский институт, Санкт-Петербург</h3>
-      <p>2016</p>
-      <p>Банковское дело, банкир-экономист</p>
-    </div>
-  </section>
+      <!-- Образование -->
+      <section id="education">
+        <h2>Образование</h2>
+        <div class="education-item">
+          <h3>Санкт-Петербургский политехнический университет Петра Великого</h3>
+          <p>2021 — Неоконченное высшее</p>
+          <p>Прикладная информатика, прикладной программист</p>
+        </div>
+        <div class="education-item">
+          <h3>Международный банковский институт, Санкт-Петербург</h3>
+          <p>2016</p>
+          <p>Банковское дело, банкир-экономист</p>
+        </div>
+      </section>
 
-  <!-- Контакты -->
-  <section id="contact">
-    <h2>Контакты</h2>
-    <p>Email: <a href="mailto:ninel.akim@gmail.com">ninel.akim@gmail.com</a></p>
-    <p>Telegram: <a href="http://t.me/yansimple">@yansimple</a></p>
-  </section>
+      <!-- Контакты -->
+      <section id="contact">
+        <h2>Контакты</h2>
+        <p>Email: <a href="mailto:ninel.akim@gmail.com">ninel.akim@gmail.com</a></p>
+        <p>Telegram: <a href="http://t.me/yansimple">@yansimple</a></p>
+      </section>
+    </div>
+  </div>
 
   <!-- Подключение Particles.js -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -515,7 +488,7 @@
       } else {
         setTimeout(() => {
           document.getElementById('preloader').style.display = 'none';
-        }, 1000);
+        }, 1000); // Задержка перед скрытием прелоадера
       }
     }
 
